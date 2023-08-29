@@ -1,1 +1,2 @@
 D:\Student Gradebook\MyProject\x64\Debug\MyProject.exe
+D:\Student Gradebook\StudentGradebook\x64\Debug\MyProject.exe
