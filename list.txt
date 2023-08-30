@@ -4,3 +4,6 @@ Max            Rozhenuk       pi-211    20
 Bogdan         Tarasishin     pi-212    17 
 Dima           Gorobec        pi-212    3  
 Sasha          Latkivskiy     pi-212    17 
+Sasha          Shcherbak      pi-212    17 
+Igor           Gaiduk         pi-212    17 
+
