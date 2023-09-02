@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <fstream>
+#include "Functions.hpp"
 
 class Student {
 private:
@@ -8,36 +10,24 @@ private:
 	std::string group;
 	int age;
 public:
-	std::string get_name() const {
-		return name;
-	}
-	void set_name(std::string name) {
-		this->name = name;
-	}
-	std::string get_surname() const {
-		return surname;
-	}
-	void set_surname(std::string surname) {
-		this->surname = surname;
-	}
-	std::string get_group() const {
-		return group;
-	}
-	void set_group(std::string group) {
-		this->group = group;
-	}
-	int get_age() const {
-		return age;
-	}
-	void set_age(int age) {
-		this->age = age;
-	}
-	Student() = default;
-	Student(std::string name, std::string surname, std::string group, int age)
-		:name{ name }, surname{ surname }, group{ group }, age{ age } {
-	}
-	Student(const Student& source) :Student(source.name, source.surname, source.group, source.age) {
-	}
-	bool operator==(const Student rhs) const;
-	friend std::ostream &operator<<(std::ostream& os, const Student rhs);
+	Student();
+	Student(std::string, std::string, std::string, int);
+	Student(const Student&);
+	std::string get_name() const;
+	std::string get_surname() const;
+	std::string get_group() const;
+	int get_age() const;
+	void set_name(std::string);
+	void set_surname(std::string);
+	void set_group(std::string);
+	void set_age(int age);
+	bool operator==(const Student) const;
+	friend std::ostream &operator<<(std::ostream&, const Student);
+	friend void input_data_about_student(Student&);
+	friend void show_students(const std::vector<Student>&);
+	friend void show_students(const std::vector<Student>&, std::string);
+	friend bool does_already_exist(const Student, std::ifstream&);
+	friend void add_student(std::ofstream&, std::ifstream&);
+	friend void rewrite_data_to_file(std::vector<Student>, std::ofstream&);
+	friend bool does_group_exist(std::vector<Student>&, std::ifstream&, std::string);
 };
