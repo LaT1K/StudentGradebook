@@ -41,3 +41,11 @@ bool is_available_input_for_number(std::string user_number) {
         return false;
 }
 
+bool is_available_input_for_salary(std::string user_salary) {
+    double is_double{};
+    std::stringstream ss{ user_salary };
+    if (ss >> is_double)
+        return true;
+    else
+        return false;
+}

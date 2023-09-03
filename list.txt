@@ -7,3 +7,5 @@ Sasha          Shcherbak      pi-212    17
 Igor           Gaiduk         pi-212    17 
 Igor           Gaiduk         pi-212    17 
 dfdf           dfdfd          df33      0  
+Vita           Bozhenko       pi-202    34 
+Ania           Slobodian      pi-212    8  
