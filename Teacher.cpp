@@ -137,11 +137,6 @@ std::vector<Teacher> get_teacher_list(std::ifstream& ifile) {
     return student_list;
 }
 
-std::ostream& operator<<(std::ostream& os, const Teacher rhs){
-    os << std::setw(15) << std::left << rhs.name << std::setw(15) << rhs.surname << std::setw(10) << rhs.subject << std::setw(10) << rhs.salary << std::setw(3) << rhs.age << std::endl;
-    return os;
-}
-
 void show_list(const std::vector<Teacher>& teacher_list) {
     std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Subject" << std::setw(10) << "Salary" << std::setw(3) << "Age\n";;
     for (auto& elem : teacher_list)
@@ -248,4 +243,8 @@ bool does_already_exist(const Teacher teacher, std::ifstream& ifile) {
 
     ifile.close();
     return false;
+}
+
+void Teacher::print(std::ostream& os) const{
+    os << std::setw(15) << std::left << name << std::setw(15) << surname << std::setw(10) << subject << std::setw(10) << salary << std::setw(3) << age << std::endl;
 }

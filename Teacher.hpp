@@ -4,8 +4,9 @@
 #include <fstream>
 #include <vector>
 #include "Functions.hpp"
+#include "I_Printable.hpp"
 
-class Teacher{
+class Teacher : public I_Printable{
 private:
 	std::string name;
 	std::string surname;
@@ -26,7 +27,7 @@ public:
 	void set_subject(std::string);
 	void set_salary(double);
 	void set_age(int age);
-	friend std::ostream& operator<<(std::ostream&, const Teacher);
+	virtual void print(std::ostream& os) const override;
 };
 
 enum class Teachers_menu { Show = 1, Add, Find, Delete };

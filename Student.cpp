@@ -36,11 +36,6 @@ Student::Student(std::string name, std::string surname, std::string group, int a
 Student::Student(const Student& source) :Student(source.name, source.surname, source.group, source.age) {
 }
 
-std::ostream& operator<<(std::ostream& os, const Student rhs){
-	os << std::setw(15) << std::left << rhs.name << std::setw(15) << rhs.surname << std::setw(10) << rhs.group << std::setw(3) << rhs.age << std::endl;
-	return os;
-}
-
 bool Student::operator==(const Student rhs)const {
 	return this->name == rhs.name && this->surname == rhs.surname && this->group == rhs.group && this->age == rhs.age;
 }
@@ -200,7 +195,7 @@ void launch_students_menu() {
     std::ofstream ofile;
     std::string surname{}, group{};
     Student student{};
-    std::vector<Student> student_list;
+    std::vector<I_Printable> student_list;
     do {
         show_students_menu();
         std::cin >> user_input;
@@ -221,8 +216,11 @@ void launch_students_menu() {
             ifile.clear();
             ifile.seekg(0, std::ios::beg);
             ifile.close();
-            if (!student_list.empty())
-                show_list(student_list);
+            if (!student_list.empty()) {
+                I_Printable* temp = new Student;
+                temp->show(student_list);
+            }
+                
             else
                 std::cout << "The list is empty\n";
             break;
@@ -262,7 +260,7 @@ void launch_students_menu() {
                 return;
             }
             if (does_group_exist(student_list, ifile, group)) {
-                show_list(student_list, group);
+                
             }
             else {
                 std::cout << "No one studies in group " << group << std::endl;
@@ -274,15 +272,19 @@ void launch_students_menu() {
     } while (is_integer != NUMBER_OF_OPTIONS_STUDENTS_MENU);
 }
 
-void show_list(const std::vector<Student>& student_list) {
+void Student::print(std::ostream& os) const{
+    os << std::setw(15) << std::left << name << std::setw(15) << surname << std::setw(10) << group << std::setw(3) << age << std::endl;
+}
+
+void Student::show(const std::vector<I_Printable>& list) const{
     std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Group" << std::setw(3) << "Age\n";
-    for (auto& elem : student_list)
+    for (auto& elem : list)
         std::cout << elem;
 }
 
-void show_list(const std::vector<Student>& student_list, std::string group_name) {
+void Student::show(const std::vector<I_Printable>& list, std::string group_name) const{
     std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Group" << std::setw(3) << "Age\n";
-    for (auto& student : student_list)
+    for (auto& student : list)
         if (student.get_group() == group_name)
             std::cout << student;
 }
