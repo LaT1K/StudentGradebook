@@ -9,4 +9,6 @@ public:
 	virtual void show(const std::vector<I_Printable>&) const = 0;
 	virtual void show(const std::vector<I_Printable>&, std::string) const = 0;
 	virtual std::string get_group() const = 0;
+
+	// comment
 };
