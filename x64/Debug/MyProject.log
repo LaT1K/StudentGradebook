@@ -1,73 +1,25 @@
-﻿  main.cpp
+﻿  Funcions.cpp
+  main.cpp
+  Person.cpp
+D:\Student Gradebook\StudentGradebook\Teacher.hpp(9,30): error C2504: 'Person': base class undefined
+D:\Student Gradebook\StudentGradebook\Teacher.hpp(22,43): error C2065: 'Person': undeclared identifier
+D:\Student Gradebook\StudentGradebook\Teacher.hpp(22,36): error C2923: 'std::vector': 'Person' is not a valid template type argument for parameter '_Ty'
+D:\Student Gradebook\StudentGradebook\Teacher.hpp(22,43): message : see declaration of 'Person'
+D:\Student Gradebook\StudentGradebook\Teacher.hpp(22,36): error C2976: 'std::vector': too few template arguments
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\vector(494,1): message : see declaration of 'std::vector'
+D:\Student Gradebook\StudentGradebook\Teacher.hpp(21,15): error C3668: 'Teacher::print': method with override specifier 'override' did not override any base class methods
+D:\Student Gradebook\StudentGradebook\Student.hpp(7,30): error C2504: 'Person': base class undefined
+D:\Student Gradebook\StudentGradebook\Student.hpp(23,43): error C2065: 'Person': undeclared identifier
+D:\Student Gradebook\StudentGradebook\Student.hpp(23,36): error C2923: 'std::vector': 'Person' is not a valid template type argument for parameter '_Ty'
+D:\Student Gradebook\StudentGradebook\Student.hpp(23,43): message : see declaration of 'Person'
+D:\Student Gradebook\StudentGradebook\Student.hpp(23,36): error C2976: 'std::vector': too few template arguments
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\vector(494,1): message : see declaration of 'std::vector'
+D:\Student Gradebook\StudentGradebook\Student.hpp(22,15): error C3668: 'Student::print': method with override specifier 'override' did not override any base class methods
   Student.cpp
-D:\Student Gradebook\StudentGradebook\Student.cpp(215,13): error C2679: бинарный "=": не найден оператор, принимающий правый операнд типа "std::vector<Student,std::allocator<Student>>" (или приемлемое преобразование отсутствует)
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\vector(1566,26): message : может быть "std::vector<I_Printable,std::allocator<I_Printable>> &std::vector<I_Printable,std::allocator<I_Printable>>::operator =(std::initializer_list<_Ty>)"
-          with
-          [
-              _Ty=I_Printable
-          ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\vector(1545,26): message : или       "std::vector<I_Printable,std::allocator<I_Printable>> &std::vector<I_Printable,std::allocator<I_Printable>>::operator =(const std::vector<I_Printable,std::allocator<I_Printable>> &)"
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\vector(798,26): message : или       "std::vector<I_Printable,std::allocator<I_Printable>> &std::vector<I_Printable,std::allocator<I_Printable>>::operator =(std::vector<I_Printable,std::allocator<I_Printable>> &&) noexcept(<expr>)"
-D:\Student Gradebook\StudentGradebook\Student.cpp(215,13): message : при попытке сопоставить список аргументов "(std::vector<I_Printable,std::allocator<I_Printable>>, std::vector<Student,std::allocator<Student>>)"
-D:\Student Gradebook\StudentGradebook\Student.cpp(239,17): error C2664: "bool find_student(const std::vector<Student,std::allocator<Student>> &,std::string)": невозможно преобразовать аргумент 1 из "std::vector<I_Printable,std::allocator<I_Printable>>" в "const std::vector<Student,std::allocator<Student>> &"
-D:\Student Gradebook\StudentGradebook\Student.cpp(239,30): message : Причина: невозможно преобразовать "std::vector<I_Printable,std::allocator<I_Printable>>" в "const std::vector<Student,std::allocator<Student>>"
-D:\Student Gradebook\StudentGradebook\Student.cpp(239,30): message : Для выполнения данного преобразования нет доступного оператора преобразования, определенного пользователем, или вызов оператора невозможен
-D:\Student Gradebook\StudentGradebook\Student.cpp(106,6): message : см. объявление "find_student"
-D:\Student Gradebook\StudentGradebook\Student.cpp(239,17): message : при попытке сопоставить список аргументов "(std::vector<I_Printable,std::allocator<I_Printable>>, std::string)"
-D:\Student Gradebook\StudentGradebook\Student.cpp(247,17): error C2664: "bool delete_student(std::vector<Student,std::allocator<Student>> &,const Student &)": невозможно преобразовать аргумент 1 из "std::vector<I_Printable,std::allocator<I_Printable>>" в "std::vector<Student,std::allocator<Student>> &"
-D:\Student Gradebook\StudentGradebook\Student.cpp(117,6): message : см. объявление "delete_student"
-D:\Student Gradebook\StudentGradebook\Student.cpp(247,17): message : при попытке сопоставить список аргументов "(std::vector<I_Printable,std::allocator<I_Printable>>, Student)"
-D:\Student Gradebook\StudentGradebook\Student.cpp(248,17): error C2664: "void rewrite_data_to_file(std::vector<Student,std::allocator<Student>>,std::ofstream &)": невозможно преобразовать аргумент 1 из "std::vector<I_Printable,std::allocator<I_Printable>>" в "std::vector<Student,std::allocator<Student>>"
-D:\Student Gradebook\StudentGradebook\Student.cpp(248,38): message : Для выполнения данного преобразования нет доступного оператора преобразования, определенного пользователем, или вызов оператора невозможен
-D:\Student Gradebook\StudentGradebook\Student.cpp(168,6): message : см. объявление "rewrite_data_to_file"
-D:\Student Gradebook\StudentGradebook\Student.cpp(248,17): message : при попытке сопоставить список аргументов "(std::vector<I_Printable,std::allocator<I_Printable>>, std::ofstream)"
-D:\Student Gradebook\StudentGradebook\Student.cpp(262,17): error C2664: "bool does_group_exist(std::vector<Student,std::allocator<Student>> &,std::ifstream &,std::string)": невозможно преобразовать аргумент 1 из "std::vector<I_Printable,std::allocator<I_Printable>>" в "std::vector<Student,std::allocator<Student>> &"
-D:\Student Gradebook\StudentGradebook\Student.cpp(181,6): message : см. объявление "does_group_exist"
-D:\Student Gradebook\StudentGradebook\Student.cpp(262,17): message : при попытке сопоставить список аргументов "(std::vector<I_Printable,std::allocator<I_Printable>>, std::ifstream, std::string)"
+D:\Student Gradebook\StudentGradebook\Student.cpp(204,21): error C2664: 'void Person::show_list(const std::vector<Person,std::allocator<Person>> &) const': cannot convert argument 1 from 'std::vector<Student,std::allocator<Student>>' to 'const std::vector<Person,std::allocator<Person>> &'
+D:\Student Gradebook\StudentGradebook\Student.cpp(204,33): message : Reason: cannot convert from 'std::vector<Student,std::allocator<Student>>' to 'const std::vector<Person,std::allocator<Person>>'
+D:\Student Gradebook\StudentGradebook\Student.cpp(204,33): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\Student Gradebook\StudentGradebook\Person.hpp(25,15): message : see declaration of 'Person::show_list'
+D:\Student Gradebook\StudentGradebook\Student.cpp(204,21): message : while trying to match the argument list '(std::vector<Student,std::allocator<Student>>)'
   Teacher.cpp
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,13): error C2259: "Teacher": невозможно создать экземпляр абстрактного класса
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(9,7): message : см. объявление "Teacher"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,13): message : из-за следующих членов:
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,13): message : void I_Printable::show(const std::vector<I_Printable,std::allocator<I_Printable>> &,std::string) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(10,15): message : см. объявление "I_Printable::show"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,13): message : void I_Printable::show(const std::vector<I_Printable,std::allocator<I_Printable>> &) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(9,15): message : см. объявление "I_Printable::show"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,13): message : std::string I_Printable::get_group(void) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(11,22): message : см. объявление "I_Printable::get_group"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,20): error C2259: "Teacher": невозможно создать экземпляр абстрактного класса
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(9,7): message : см. объявление "Teacher"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,20): message : из-за следующих членов:
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,20): message : void I_Printable::show(const std::vector<I_Printable,std::allocator<I_Printable>> &,std::string) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(10,15): message : см. объявление "I_Printable::show"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,20): message : void I_Printable::show(const std::vector<I_Printable,std::allocator<I_Printable>> &) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(9,15): message : см. объявление "I_Printable::show"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,20): message : std::string I_Printable::get_group(void) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(11,22): message : см. объявление "I_Printable::get_group"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,21): error C2259: "Teacher": невозможно создать экземпляр абстрактного класса
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(9,7): message : см. объявление "Teacher"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,21): message : из-за следующих членов:
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,21): message : void I_Printable::show(const std::vector<I_Printable,std::allocator<I_Printable>> &,std::string) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(10,15): message : см. объявление "I_Printable::show"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,21): message : void I_Printable::show(const std::vector<I_Printable,std::allocator<I_Printable>> &) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(9,15): message : см. объявление "I_Printable::show"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(66,21): message : std::string I_Printable::get_group(void) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(11,22): message : см. объявление "I_Printable::get_group"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(135,32): error C2259: "Teacher": невозможно создать экземпляр абстрактного класса
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(9,7): message : см. объявление "Teacher"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(135,32): message : из-за следующих членов:
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(135,32): message : void I_Printable::show(const std::vector<I_Printable,std::allocator<I_Printable>> &,std::string) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(10,15): message : см. объявление "I_Printable::show"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(135,32): message : void I_Printable::show(const std::vector<I_Printable,std::allocator<I_Printable>> &) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(9,15): message : см. объявление "I_Printable::show"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(135,32): message : std::string I_Printable::get_group(void) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(11,22): message : см. объявление "I_Printable::get_group"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(225,6): error C2259: "Teacher": невозможно создать экземпляр абстрактного класса
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(9,7): message : см. объявление "Teacher"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(225,6): message : из-за следующих членов:
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(225,6): message : void I_Printable::show(const std::vector<I_Printable,std::allocator<I_Printable>> &,std::string) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(10,15): message : см. объявление "I_Printable::show"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(225,6): message : void I_Printable::show(const std::vector<I_Printable,std::allocator<I_Printable>> &) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(9,15): message : см. объявление "I_Printable::show"
-D:\Student Gradebook\StudentGradebook\Teacher.cpp(225,6): message : std::string I_Printable::get_group(void) const: абстрактный
-D:\Student Gradebook\StudentGradebook\I_Printable.hpp(11,22): message : см. объявление "I_Printable::get_group"
-  Создание кода...
+  Generating Code...

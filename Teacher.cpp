@@ -1,47 +1,24 @@
 #include "Teacher.hpp"
 
 Teacher::Teacher(){
-	this->name = "Unknown";
-	this->surname = "Unknown";
 	this->subject = "Unknown";
-	this->age = 0;
 	this->salary = 0.0;
 }
 
 Teacher::Teacher(std::string name, std::string surname, std::string subject, int age, double salary)
-	:name{ name }, surname{ surname }, subject{ subject }, age{ age }, salary{ salary } {
+    :Person(name, surname, age), subject{ subject }, salary{ salary } {
 }
 
 Teacher::Teacher(const Teacher& source)
-:Teacher(source.name, source.surname, source.subject, source.age, source.salary){
-}
-
-std::string Teacher::get_name() const{
-	return this->name;
-}
-
-std::string Teacher::get_surname() const {
-	return this->surname;
+:Teacher(source.get_name(), source.get_surname(), source.get_subject(), source.get_age(), source.get_salary()){
 }
 
 std::string Teacher::get_subject() const {
 	return this->subject;
 }
 
-int Teacher::get_age() const {
-	return this->age;
-}
-
 double Teacher::get_salary() const {
 	return this->salary;
-}
-
-void Teacher::set_name(std::string name){
-    this->name = name;
-}
-
-void Teacher::set_surname(std::string surname) {
-    this->surname = surname;
 }
 
 void Teacher::set_subject(std::string subject) {
@@ -52,9 +29,6 @@ void Teacher::set_salary(double salary) {
     this->salary = salary;
 }
 
-void Teacher::set_age(int age) {
-    this->age = age;
-}
 
 void launch_teachers_menu() {
     std::string user_input{};
@@ -246,5 +220,16 @@ bool does_already_exist(const Teacher teacher, std::ifstream& ifile) {
 }
 
 void Teacher::print(std::ostream& os) const{
-    os << std::setw(15) << std::left << name << std::setw(15) << surname << std::setw(10) << subject << std::setw(10) << salary << std::setw(3) << age << std::endl;
+    os << std::setw(15) << std::left << this->get_name() << std::setw(15) << this->get_surname() << std::setw(10) << this->get_subject() << std::setw(10) << this->get_salary() << std::setw(3) << this->get_age() << std::endl;
+}
+
+void Teacher::show_list(const std::vector<Person>& list) const {
+    std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Subject" << std::setw(10) << "Salary" << std::setw(3) << "Age\n";;
+    for (const auto& person : list) {
+        const Teacher* teacher = dynamic_cast<const Teacher*>(&person);
+        if (teacher) {
+            teacher->print(std::cout);
+            std::cout << std::endl;
+        }
+    }
 }
