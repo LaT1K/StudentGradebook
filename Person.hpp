@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "I_Printable.hpp"
-#include "Student.hpp"
 
 class Person :public I_Printable{
 private:
@@ -22,5 +22,6 @@ public:
 	void set_age(int);
 
 	virtual void print(std::ostream& os) const;
-	virtual void show_list(const std::vector<Person>&) const;
+	virtual void show_list() const;
+	virtual std::string get_group() const;
 };

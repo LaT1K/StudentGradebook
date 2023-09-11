@@ -1,25 +1,5 @@
-﻿  Funcions.cpp
-  main.cpp
-  Person.cpp
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(9,30): error C2504: 'Person': base class undefined
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(22,43): error C2065: 'Person': undeclared identifier
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(22,36): error C2923: 'std::vector': 'Person' is not a valid template type argument for parameter '_Ty'
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(22,43): message : see declaration of 'Person'
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(22,36): error C2976: 'std::vector': too few template arguments
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\vector(494,1): message : see declaration of 'std::vector'
-D:\Student Gradebook\StudentGradebook\Teacher.hpp(21,15): error C3668: 'Teacher::print': method with override specifier 'override' did not override any base class methods
-D:\Student Gradebook\StudentGradebook\Student.hpp(7,30): error C2504: 'Person': base class undefined
-D:\Student Gradebook\StudentGradebook\Student.hpp(23,43): error C2065: 'Person': undeclared identifier
-D:\Student Gradebook\StudentGradebook\Student.hpp(23,36): error C2923: 'std::vector': 'Person' is not a valid template type argument for parameter '_Ty'
-D:\Student Gradebook\StudentGradebook\Student.hpp(23,43): message : see declaration of 'Person'
-D:\Student Gradebook\StudentGradebook\Student.hpp(23,36): error C2976: 'std::vector': too few template arguments
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\vector(494,1): message : see declaration of 'std::vector'
-D:\Student Gradebook\StudentGradebook\Student.hpp(22,15): error C3668: 'Student::print': method with override specifier 'override' did not override any base class methods
-  Student.cpp
-D:\Student Gradebook\StudentGradebook\Student.cpp(204,21): error C2664: 'void Person::show_list(const std::vector<Person,std::allocator<Person>> &) const': cannot convert argument 1 from 'std::vector<Student,std::allocator<Student>>' to 'const std::vector<Person,std::allocator<Person>> &'
-D:\Student Gradebook\StudentGradebook\Student.cpp(204,33): message : Reason: cannot convert from 'std::vector<Student,std::allocator<Student>>' to 'const std::vector<Person,std::allocator<Person>>'
-D:\Student Gradebook\StudentGradebook\Student.cpp(204,33): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-D:\Student Gradebook\StudentGradebook\Person.hpp(25,15): message : see declaration of 'Person::show_list'
-D:\Student Gradebook\StudentGradebook\Student.cpp(204,21): message : while trying to match the argument list '(std::vector<Student,std::allocator<Student>>)'
-  Teacher.cpp
-  Generating Code...
+﻿  Student.cpp
+D:\Student Gradebook\StudentGradebook\Student.cpp(231,17): error C2664: 'bool delete_student(std::vector<Person *,std::allocator<Person *>> &,const Person *)': cannot convert argument 2 from 'Student' to 'const Person *'
+D:\Student Gradebook\StudentGradebook\Student.cpp(231,46): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+D:\Student Gradebook\StudentGradebook\Student.cpp(101,6): message : see declaration of 'delete_student'
+D:\Student Gradebook\StudentGradebook\Student.cpp(231,17): message : while trying to match the argument list '(std::vector<Person *,std::allocator<Person *>>, Student)'

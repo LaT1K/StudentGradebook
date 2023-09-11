@@ -73,23 +73,24 @@ void input_data_about_student(Student& student) {
     } while (!is_correct);
 }
 
-std::vector<Student> get_student_list(std::ifstream& ifile) {
+std::vector<Person*>get_student_list(std::ifstream& ifile) {
     std::string line;
     std::string name, surname, group;
     int age;
-    std::vector<Student> student_list;
+    std::vector<Person*> student_list;
     while (std::getline(ifile, line)) {
         std::stringstream ss{ line };
         ss >> name >> surname >> group >> age;
-        student_list.push_back({ name, surname, group, age });
+        Person* temp = new Student({ name, surname, group, age });
+        student_list.push_back(temp);
     }
     return student_list;
 }
 
-bool find_student(const std::vector<Student>& student_list, std::string surname) {
+bool find_student(const std::vector<Person*>& student_list, std::string surname) {
     bool x = false;
     for (const auto &elem : student_list) {
-        if (elem.get_surname() == surname) {
+        if (elem->get_surname() == surname) {
             std::cout << elem;
             x = true;
         }
@@ -97,9 +98,9 @@ bool find_student(const std::vector<Student>& student_list, std::string surname)
     return x;
 }
 
-bool delete_student(std::vector<Student>& student_list, const Student& studentToDelete) {
+bool delete_student(std::vector<Person*>& student_list, const Person studentToDelete) {
     auto it = std::remove_if(student_list.begin(), student_list.end(),
-        [&studentToDelete](const Student& elem) {
+        [studentToDelete](const Person elem) {
             return elem == studentToDelete;
         });
 
@@ -148,7 +149,7 @@ void add_student(std::ofstream& ofile, std::ifstream& ifile) {
     }
 }
 
-void rewrite_data_to_file(std::vector<Student> student_list, std::ofstream& ofile) {
+void rewrite_data_to_file(std::vector<Person*> student_list, std::ofstream& ofile) {
     ofile.open("list.txt");
     if (!ofile.is_open()) {
         std::cout << "Can not open the file\n";
@@ -156,15 +157,15 @@ void rewrite_data_to_file(std::vector<Student> student_list, std::ofstream& ofil
     }
 
     for (auto& elem : student_list) {
-        ofile << elem;
+        std::cout << elem;
     }
     ofile.close();
 }
 
-bool does_group_exist(std::vector<Student>& student_list, std::ifstream& ifile, std::string group_name) {
+bool does_group_exist(std::vector<Person*>& student_list, std::ifstream& ifile, std::string group_name) {
     student_list = get_student_list(ifile);
-    for (auto& student : student_list) {
-        if (student.get_group() == group_name)
+    for (auto &student : student_list) {
+        if (student->get_group() == group_name)
             return true;
     }
     return false;
@@ -178,7 +179,7 @@ void launch_students_menu() {
     std::ofstream ofile;
     std::string surname{}, group{};
     Student student{};
-    std::vector<Student> student_list;
+    std::vector<Person*>student_list;
     do {
         show_students_menu();
         std::cin >> user_input;
@@ -200,8 +201,9 @@ void launch_students_menu() {
             ifile.seekg(0, std::ios::beg);
             ifile.close();
             if (!student_list.empty()) {
-                Person* temp = new Student;
-                temp->show_list(student_list);
+                std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Age" << std::setw(10) << "Group" << std::endl;
+                for (auto& student : student_list)
+                    student->show_list();
             }
             else
                 std::cout << "The list is empty\n";
@@ -255,23 +257,11 @@ void launch_students_menu() {
 }
 
 void Student::print(std::ostream& os) const{
-    os << std::setw(15) << std::left << this->get_name()<< std::setw(15) << this->get_surname() << std::setw(10) << this->get_group() << std::setw(3) << this->get_age() << std::endl;
+    Person::print(os);
+    os <<std::setw(10) << this->get_group() << std::endl;
 }
 
-void Student::show_list(const std::vector<Person>& list) const {
-    std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Group" << std::setw(3) << "Age\n";
-    for (const auto& person : list) {
-        const Student* student = dynamic_cast<const Student*>(&person);
-        if (student) {
-            student->print(std::cout);
-            std::cout << std::endl;
-        }
-    }
+void Student::show_list() const {
+    Person::show_list();
+    std::cout << std::setw(15) << this->get_group() << std::endl;
 }
-
-//void Student::show(const std::vector<I_Printable>& list, std::string group_name) const{
-//    std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Group" << std::setw(3) << "Age\n";
-//    for (auto& student : list)
-//        if (student.get_group() == group_name)
-//            std::cout << student;
-//}

@@ -29,7 +29,7 @@ int main() {
             launch_students_menu();
             break;
         case Main_menu::Teachers:
-            launch_teachers_menu();
+            /*launch_teachers_menu();*/
             break;
         default:
             break;

@@ -19,12 +19,11 @@ public:
 	void set_subject(std::string);
 	void set_salary(double);
 	virtual void print(std::ostream& os) const override;
-	virtual void show_list(const std::vector<Person>&) const;
+	virtual void show_list() const override;
 };
 
 enum class Teachers_menu { Show = 1, Add, Find, Delete };
 
-void launch_teachers_menu();
-std::vector<Teacher> get_teacher_list(std::ifstream &);
-void show_list(const std::vector<Teacher>&);
-void add_teacher(std::ofstream&, std::ifstream&);
+//void launch_teachers_menu();
+//std::vector<Teacher> get_teacher_list(std::ifstream &);
+//void add_teacher(std::ofstream&, std::ifstream&);

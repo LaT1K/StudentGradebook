@@ -33,11 +33,13 @@ Person::Person(const Person& source)
 }
 
 void Person::print(std::ostream& os) const {
-	os << std::setw(15) << std::left << this->get_name() << std::setw(15) << this->get_surname() << std::setw(3) << this->get_age() << std::endl;
+	os << std::setw(15) << std::left << this->get_name() << std::setw(15) << this->get_surname() << std::setw(3) << this->get_age();
 }
 
-void Person::show_list(const std::vector<Person>& list) const {
-	std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(3) << "Age\n";
-	for (auto& person : list)
-			std::cout << person;
+void Person::show_list() const {
+	std::cout << std::setw(15) << std::left << this->get_name() << std::setw(15) << this->get_surname() << std::setw(10) << this->get_age();
+}
+
+std::string Person::get_group() const {
+	return "";
 }

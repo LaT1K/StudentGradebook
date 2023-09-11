@@ -30,73 +30,73 @@ void Teacher::set_salary(double salary) {
 }
 
 
-void launch_teachers_menu() {
-    std::string user_input{};
-    int is_integer{};
-    std::ifstream ifile;
-    const int NUMBER_OF_OPTIONS_TEACHERS_MENU{ 5 };
-    std::ofstream ofile;
-    std::string surname{}, group{};
-    Teacher teacher{};
-    std::vector<Teacher> teacher_list;
-    const std::string TEACHER_LIST{ "teacher_list" };
-    do {
-        show_teachers_menu();
-        std::cin >> user_input;
-        std::stringstream ss{ user_input };
-        if (!(ss >> is_integer) || is_integer <1 || is_integer >NUMBER_OF_OPTIONS_TEACHERS_MENU) {
-            std::cout << "You can only choose 1 - 5\n";
-            continue;
-        }
-        switch (Teachers_menu(is_integer))
-        {
-        case Teachers_menu::Show:
-            ifile.open(TEACHER_LIST);
-            if (!ifile.is_open()) {
-                std::cout << "Can not open the file\n";
-                return;
-            }
-            teacher_list = get_teacher_list(ifile);
-            ifile.clear();
-            ifile.seekg(0, std::ios::beg);
-            ifile.close();
-            if (!teacher_list.empty())
-                show_list(teacher_list);
-            else
-                std::cout << "The list is empty\n";
-            break;
-        case Teachers_menu::Add:
-            ofile.open(TEACHER_LIST, std::ios::app);
-            if (!ofile.is_open()) {
-                std::cout << "Can not open the file\n";
-                return;
-            }
-            add_teacher(ofile, ifile);
-            ofile.close();
-            break;
-        case Teachers_menu::Find:
-            std::cout << "Enter student's surname to search\n";
-            std::cin >> surname;
-            /*if (find_student(student_list, surname))
-               break;
-            else
-                std::cout << "Student [ " << surname << " ] " << " was not found\n";
-            break;*/
-        case Teachers_menu::Delete:
-            std::cout << "Enter information about teacher to delete\n";
-            //input_data_about_student(student);
-            /*if (delete_student(teacher_list, teacher)) {
-                rewrite_data_to_file(teacher_list, ofile);
-                std::cout << "Student [ " << teacher.get_surname() << " ] was deleted from the list\n";
-            }
-            else
-                std::cout << "Student [ " << teacher.get_surname() << " ] " << " was not found\n";
-            break;*/
-        default:
-            break;
-        }
-    } while (is_integer != NUMBER_OF_OPTIONS_TEACHERS_MENU);
-}
+//void launch_teachers_menu() {
+//    std::string user_input{};
+//    int is_integer{};
+//    std::ifstream ifile;
+//    const int NUMBER_OF_OPTIONS_TEACHERS_MENU{ 5 };
+//    std::ofstream ofile;
+//    std::string surname{}, group{};
+//    Teacher teacher{};
+//    std::vector<Teacher> teacher_list;
+//    const std::string TEACHER_LIST{ "teacher_list" };
+//    do {
+//        show_teachers_menu();
+//        std::cin >> user_input;
+//        std::stringstream ss{ user_input };
+//        if (!(ss >> is_integer) || is_integer <1 || is_integer >NUMBER_OF_OPTIONS_TEACHERS_MENU) {
+//            std::cout << "You can only choose 1 - 5\n";
+//            continue;
+//        }
+//        switch (Teachers_menu(is_integer))
+//        {
+//        case Teachers_menu::Show:
+//            ifile.open(TEACHER_LIST);
+//            if (!ifile.is_open()) {
+//                std::cout << "Can not open the file\n";
+//                return;
+//            }
+//            teacher_list = get_teacher_list(ifile);
+//            ifile.clear();
+//            ifile.seekg(0, std::ios::beg);
+//            ifile.close();
+//            if (!teacher_list.empty())
+//                show_list(teacher_list);
+//            else
+//                std::cout << "The list is empty\n";
+//            break;
+//        case Teachers_menu::Add:
+//            ofile.open(TEACHER_LIST, std::ios::app);
+//            if (!ofile.is_open()) {
+//                std::cout << "Can not open the file\n";
+//                return;
+//            }
+//            add_teacher(ofile, ifile);
+//            ofile.close();
+//            break;
+//        case Teachers_menu::Find:
+//            std::cout << "Enter student's surname to search\n";
+//            std::cin >> surname;
+//            /*if (find_student(student_list, surname))
+//               break;
+//            else
+//                std::cout << "Student [ " << surname << " ] " << " was not found\n";
+//            break;*/
+//        case Teachers_menu::Delete:
+//            std::cout << "Enter information about teacher to delete\n";
+//            //input_data_about_student(student);
+//            /*if (delete_student(teacher_list, teacher)) {
+//                rewrite_data_to_file(teacher_list, ofile);
+//                std::cout << "Student [ " << teacher.get_surname() << " ] was deleted from the list\n";
+//            }
+//            else
+//                std::cout << "Student [ " << teacher.get_surname() << " ] " << " was not found\n";
+//            break;*/
+//        default:
+//            break;
+//        }
+//    } while (is_integer != NUMBER_OF_OPTIONS_TEACHERS_MENU);
+//}
 
 std::vector<Teacher> get_teacher_list(std::ifstream& ifile) {
     std::string line;
@@ -111,11 +111,6 @@ std::vector<Teacher> get_teacher_list(std::ifstream& ifile) {
     return student_list;
 }
 
-void show_list(const std::vector<Teacher>& teacher_list) {
-    std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Subject" << std::setw(10) << "Salary" << std::setw(3) << "Age\n";;
-    for (auto& elem : teacher_list)
-        std::cout << elem;
-}
 
 void add_teacher(std::ofstream& ofile, std::ifstream& ifile) {
 
@@ -220,16 +215,10 @@ bool does_already_exist(const Teacher teacher, std::ifstream& ifile) {
 }
 
 void Teacher::print(std::ostream& os) const{
-    os << std::setw(15) << std::left << this->get_name() << std::setw(15) << this->get_surname() << std::setw(10) << this->get_subject() << std::setw(10) << this->get_salary() << std::setw(3) << this->get_age() << std::endl;
+    os << std::setw(10) << this->get_subject() << std::setw(10) << this->get_salary() << std::endl;
 }
 
-void Teacher::show_list(const std::vector<Person>& list) const {
-    std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Subject" << std::setw(10) << "Salary" << std::setw(3) << "Age\n";;
-    for (const auto& person : list) {
-        const Teacher* teacher = dynamic_cast<const Teacher*>(&person);
-        if (teacher) {
-            teacher->print(std::cout);
-            std::cout << std::endl;
-        }
-    }
+void Teacher::show_list() const {
+    Person::show_list();
+    std::cout << *this;
 }
