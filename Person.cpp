@@ -43,3 +43,12 @@ void Person::show_list() const {
 std::string Person::get_group() const {
 	return "";
 }
+//
+//bool Person::operator==(const Person rhs) const {
+//	return this->get_name() == rhs.get_name() && this->get_surname() == rhs.get_surname() && this->get_group() == rhs.get_group() && this->get_age() == rhs.get_age();
+//
+//}
+
+bool operator==(Person* lhs, const Person rhs) {
+	return lhs->get_name() == rhs.get_name() && lhs->get_surname() == rhs.get_surname() && lhs->get_group() == rhs.get_group() && lhs->get_age() == rhs.get_age();
+}

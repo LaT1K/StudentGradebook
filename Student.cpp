@@ -19,9 +19,9 @@ Student::Student(const Student& source)
     :Student(source.get_name(), source.get_surname(), source.get_group(), source.get_age()) {
 }
 
-bool Student::operator==(const Student rhs)const {
-	return this->get_name() == rhs.get_name() && this->get_surname() == rhs.get_surname() && this->get_group() == rhs.get_group() && this->get_age() == rhs.get_age();
-}
+//bool Student::operator==(const Person rhs)const {
+//	return this->get_name() == rhs.get_name() && this->get_surname() == rhs.get_surname() && this->get_group() == rhs.get_group() && this->get_age() == rhs.get_age();
+//}
 
 void input_data_about_student(Student& student) {
     std::string name, surname, group, age;
@@ -100,7 +100,7 @@ bool find_student(const std::vector<Person*>& student_list, std::string surname)
 
 bool delete_student(std::vector<Person*>& student_list, const Person studentToDelete) {
     auto it = std::remove_if(student_list.begin(), student_list.end(),
-        [studentToDelete](const Person elem) {
+        [studentToDelete](Person* elem) {
             return elem == studentToDelete;
         });
 
