@@ -21,7 +21,11 @@ public:
 	void set_surname(std::string);
 	void set_age(int);
 
+	/*bool operator==(const Person) const;*/
+
 	virtual void print(std::ostream& os) const;
 	virtual void show_list() const;
 	virtual std::string get_group() const;
+
+	friend bool operator==(Person*, const Person);
 };

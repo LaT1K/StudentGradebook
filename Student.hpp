@@ -13,7 +13,7 @@ public:
 	Student(const Student&);
 	std::string get_group() const override;
 	void set_group(std::string);
-	bool operator==(const Student) const;
+	/*bool operator==(const Person) const;*/
 	void input_data_about_student(Student&);
 	virtual void print(std::ostream& os) const override;
 	virtual void show_list() const override;
