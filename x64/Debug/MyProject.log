@@ -1,5 +1,2 @@
 ﻿  Student.cpp
-D:\Student Gradebook\StudentGradebook\Student.cpp(231,17): error C2664: 'bool delete_student(std::vector<Person *,std::allocator<Person *>> &,const Person *)': cannot convert argument 2 from 'Student' to 'const Person *'
-D:\Student Gradebook\StudentGradebook\Student.cpp(231,46): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-D:\Student Gradebook\StudentGradebook\Student.cpp(101,6): message : see declaration of 'delete_student'
-D:\Student Gradebook\StudentGradebook\Student.cpp(231,17): message : while trying to match the argument list '(std::vector<Person *,std::allocator<Person *>>, Student)'
+  MyProject.vcxproj -> D:\StudentGradebook\StudentGradebook\x64\Debug\MyProject.exe

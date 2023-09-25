@@ -111,6 +111,9 @@ std::vector<Teacher> get_teacher_list(std::ifstream& ifile) {
     return student_list;
 }
 
+std::string Teacher::get_group() const {
+    return "";
+}
 
 void add_teacher(std::ofstream& ofile, std::ifstream& ifile) {
 

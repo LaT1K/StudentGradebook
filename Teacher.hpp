@@ -20,6 +20,7 @@ public:
 	void set_salary(double);
 	virtual void print(std::ostream& os) const override;
 	virtual void show_list() const override;
+	std::string get_group() const override;
 };
 
 enum class Teachers_menu { Show = 1, Add, Find, Delete };

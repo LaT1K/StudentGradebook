@@ -9,14 +9,15 @@ private:
 	std::string group;
 public:
 	Student() = default;
-	Student(std::string, std::string, std::string, int);
+	Student(std::string, std::string, int, std::string);
 	Student(const Student&);
-	std::string get_group() const override;
 	void set_group(std::string);
-	/*bool operator==(const Person) const;*/
+	bool operator==(const Student) const;
 	void input_data_about_student(Student&);
 	virtual void print(std::ostream& os) const override;
 	virtual void show_list() const override;
+	std::string get_group() const override;
+	std::string get_subject() const override;
 };
 
 //std::vector<Person*> get_student_list(std::ifstream&);

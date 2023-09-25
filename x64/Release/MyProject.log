@@ -1,0 +1,11 @@
+﻿  Funcions.cpp
+  I_Printable.cpp
+  main.cpp
+  Person.cpp
+  Student.cpp
+  Teacher.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 359 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  MyProject.vcxproj -> D:\StudentGradebook\StudentGradebook\x64\Release\MyProject.exe

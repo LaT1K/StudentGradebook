@@ -11,12 +11,12 @@ void Student::set_group(std::string group) {
     this->group = group;
 }
 
-Student::Student(std::string name, std::string surname, std::string group, int age)
+Student::Student(std::string name, std::string surname, int age, std::string group)
     :Person(name, surname, age), group{ group } {
 }
 
 Student::Student(const Student& source)
-    :Student(source.get_name(), source.get_surname(), source.get_group(), source.get_age()) {
+    :Student(source.get_name(), source.get_surname(), source.get_age(), source.get_group()) {
 }
 
 //bool Student::operator==(const Person rhs)const {
@@ -80,37 +80,37 @@ std::vector<Person*>get_student_list(std::ifstream& ifile) {
     std::vector<Person*> student_list;
     while (std::getline(ifile, line)) {
         std::stringstream ss{ line };
-        ss >> name >> surname >> group >> age;
-        Person* temp = new Student({ name, surname, group, age });
+        ss >> name >> surname >> age >> group;
+        Person* temp = new Student({ name, surname, age, group });
         student_list.push_back(temp);
     }
     return student_list;
 }
 
-bool find_student(const std::vector<Person*>& student_list, std::string surname) {
+bool does_student_exist(const std::vector<Person*>& student_list, std::string surname) {
     bool x = false;
     for (const auto &elem : student_list) {
         if (elem->get_surname() == surname) {
-            std::cout << elem;
+            std::cout << *elem;
             x = true;
         }
     }
     return x;
 }
 
-bool delete_student(std::vector<Person*>& student_list, const Person studentToDelete) {
-    auto it = std::remove_if(student_list.begin(), student_list.end(),
-        [studentToDelete](Person* elem) {
-            return elem == studentToDelete;
-        });
-
-    if (it != student_list.end()) {
-        student_list.erase(it, student_list.end());
-        return true;
+bool delete_student(std::vector<Person*>& student_list, const Student& studentToDelete) {
+    auto it = student_list.begin();
+    for (auto& elem : student_list) {
+        Student* student = dynamic_cast<Student*>(elem);
+        if (*student == studentToDelete) {
+            student_list.erase(it);
+            return true;
+        }
+        it++;
     }
-
     return false;
 }
+
 
 bool does_already_exist(const Student student, std::ifstream& ifile) {
     ifile.open("list.txt");
@@ -123,7 +123,7 @@ bool does_already_exist(const Student student, std::ifstream& ifile) {
     std::string name, surname, group;
     int age;
     while (!ifile.eof()) {
-        ifile >> name >> surname >> group >> age;
+        ifile >> name >> surname >> age >> group;
         if (name == student.get_name() && surname == student.get_surname() && group == student.get_group() && age == student.get_age()) {
             ifile.close();
             return true;
@@ -155,9 +155,9 @@ void rewrite_data_to_file(std::vector<Person*> student_list, std::ofstream& ofil
         std::cout << "Can not open the file\n";
         return;
     }
-
+    ofile.clear();
     for (auto& elem : student_list) {
-        std::cout << elem;
+        ofile << elem->get_name() << "\t" << elem->get_surname() << "\t" << elem->get_age() << "\t" << elem->get_group() << std::endl;
     }
     ofile.close();
 }
@@ -203,7 +203,7 @@ void launch_students_menu() {
             if (!student_list.empty()) {
                 std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Age" << std::setw(10) << "Group" << std::endl;
                 for (auto& student : student_list)
-                    student->show_list();
+                    std::cout << std::setw(15) << std::left << student->get_name() << std::setw(15) << student->get_surname() << std::setw(10) << student->get_age() << std::setw(5) << student->get_group() << std::endl;
             }
             else
                 std::cout << "The list is empty\n";
@@ -220,7 +220,7 @@ void launch_students_menu() {
         case Students_menu::Find:
             std::cout << "Enter student's surname to search\n";
             std::cin >> surname;
-            if (find_student(student_list, surname))
+            if (does_student_exist(student_list, surname))
                 break;
             else
                 std::cout << "Student [ " << surname << " ] " << " was not found\n";
@@ -244,7 +244,11 @@ void launch_students_menu() {
                 return;
             }
             if (does_group_exist(student_list, ifile, group)) {
-                
+
+                for (auto& student : student_list) {
+                    if (student->get_group() == group)
+                        std::cout << *student;
+                }
             }
             else {
                 std::cout << "No one studies in group " << group << std::endl;
@@ -264,4 +268,13 @@ void Student::print(std::ostream& os) const{
 void Student::show_list() const {
     Person::show_list();
     std::cout << std::setw(15) << this->get_group() << std::endl;
+}
+
+std::string Student::get_subject() const {
+    return "";
+}
+
+bool Student::operator==(const Student rhs) const {
+    return this->get_name() == rhs.get_name() && this->get_surname() == rhs.get_surname() && this->get_group() == rhs.get_group() && this->get_age() == rhs.get_age();
+
 }

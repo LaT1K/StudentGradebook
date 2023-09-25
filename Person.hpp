@@ -25,7 +25,7 @@ public:
 
 	virtual void print(std::ostream& os) const;
 	virtual void show_list() const;
-	virtual std::string get_group() const;
-
+	virtual std::string get_group() const = 0;
+	virtual std::string get_subject() const = 0;
 	friend bool operator==(Person*, const Person);
 };
