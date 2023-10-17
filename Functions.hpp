@@ -4,8 +4,7 @@
 #include <sstream>
 #include <vector>
 #include <iomanip>
-#include "Student.hpp"
-#include "Teacher.hpp"
+
 
 void show_main_menu();
 void show_students_menu();

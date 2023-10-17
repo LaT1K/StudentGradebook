@@ -1,8 +1,7 @@
 #include "Teacher.hpp"
 
 Teacher::Teacher(){
-	this->subject = "Unknown";
-	this->salary = 0.0;
+    init();
 }
 
 Teacher::Teacher(std::string name, std::string surname, std::string subject, int age, double salary)
@@ -119,80 +118,80 @@ void add_teacher(std::ofstream& ofile, std::ifstream& ifile) {
 
 }
 
-void input_data_about_teacher(Teacher& teacher) {
-    std::string name, surname, subject, salary, age;
-    int age_int;
-    double salary_double;
-    bool is_correct{ true };
-    do {
-        std::cout << "Enter teacher's name: ";
-        std::cin >> name;
-        if (is_available_input_for_word(name)) {
-            is_correct = true;
-            teacher.set_name(name);
-        }
-        else {
-            std::cout << "Name can contain only letters\n";
-            is_correct = false;
-        }
-    } while (!is_correct);
-
-    do {
-        std::cout << "Enter teacher's surname: ";
-        std::cin >> surname;
-        if (is_available_input_for_word(surname)) {
-            is_correct = true;
-            teacher.set_surname(surname);
-        }
-        else {
-            std::cout << "Surname can contain only letters\n";
-            is_correct = false;
-        }
-    } while (!is_correct);
-
-    do {
-        std::cout << "Enter teacher's subject: ";
-        std::cin >> subject;
-        if (is_available_input_for_word(subject)) {
-            is_correct = true;
-            teacher.set_subject(subject);
-        }
-        else {
-            std::cout << "Subject can contain only letters\n";
-            is_correct = false;
-        }
-    } while (!is_correct);
-
-    do {
-        std::cout << "Enter teacher's salary: ";
-        std::cin >> salary;
-        if (is_available_input_for_salary(salary)) {
-            is_correct = true;
-            std::stringstream ss{ salary };
-            ss >> salary_double;
-            teacher.set_salary(salary_double);
-        }
-        else {
-            std::cout << "Age can contain only numbers\n";
-            is_correct = false;
-        }
-    } while (!is_correct);
-
-    do {
-        std::cout << "Enter teacher's age: ";
-        std::cin >> age;
-        if (is_available_input_for_number(age)) {
-            is_correct = true;
-            std::stringstream ss{ age };
-            ss >> age_int;
-            teacher.set_age(age_int);
-        }
-        else {
-            std::cout << "Age can contain only numbers\n";
-            is_correct = false;
-        }
-    } while (!is_correct);
-}
+//void input_data_about_teacher(Teacher& teacher) {
+//    std::string name, surname, subject, salary, age;
+//    int age_int;
+//    double salary_double;
+//    bool is_correct{ true };
+//    do {
+//        std::cout << "Enter teacher's name: ";
+//        std::cin >> name;
+//        if (is_available_input_for_word(name)) {
+//            is_correct = true;
+//            teacher.set_name(name);
+//        }
+//        else {
+//            std::cout << "Name can contain only letters\n";
+//            is_correct = false;
+//        }
+//    } while (!is_correct);
+//
+//    do {
+//        std::cout << "Enter teacher's surname: ";
+//        std::cin >> surname;
+//        if (is_available_input_for_word(surname)) {
+//            is_correct = true;
+//            teacher.set_surname(surname);
+//        }
+//        else {
+//            std::cout << "Surname can contain only letters\n";
+//            is_correct = false;
+//        }
+//    } while (!is_correct);
+//
+//    do {
+//        std::cout << "Enter teacher's subject: ";
+//        std::cin >> subject;
+//        if (is_available_input_for_word(subject)) {
+//            is_correct = true;
+//            teacher.set_subject(subject);
+//        }
+//        else {
+//            std::cout << "Subject can contain only letters\n";
+//            is_correct = false;
+//        }
+//    } while (!is_correct);
+//
+//    do {
+//        std::cout << "Enter teacher's salary: ";
+//        std::cin >> salary;
+//        if (is_available_input_for_salary(salary)) {
+//            is_correct = true;
+//            std::stringstream ss{ salary };
+//            ss >> salary_double;
+//            teacher.set_salary(salary_double);
+//        }
+//        else {
+//            std::cout << "Age can contain only numbers\n";
+//            is_correct = false;
+//        }
+//    } while (!is_correct);
+//
+//    do {
+//        std::cout << "Enter teacher's age: ";
+//        std::cin >> age;
+//        if (is_available_input_for_number(age)) {
+//            is_correct = true;
+//            std::stringstream ss{ age };
+//            ss >> age_int;
+//            teacher.set_age(age_int);
+//        }
+//        else {
+//            std::cout << "Age can contain only numbers\n";
+//            is_correct = false;
+//        }
+//    } while (!is_correct);
+//}
 
 bool does_already_exist(const Teacher teacher, std::ifstream& ifile) {
     ifile.open("list.txt");
@@ -224,4 +223,37 @@ void Teacher::print(std::ostream& os) const{
 void Teacher::show_list() const {
     Person::show_list();
     std::cout << *this;
+}
+
+void Teacher::init() {
+    bool is_correct{ false };
+    std::string is_salary;
+
+    do {
+        std::cout << "Enter teacher's subject: ";
+        std::cin >> this->subject;
+        if (is_available_input_for_word(subject)) {
+            is_correct = true;
+            this->set_subject(subject);
+        }
+        else {
+            std::cout << "Subject can contain only letters\n";
+            is_correct = false;
+        }
+    } while (!is_correct);
+
+    do {
+        std::cout << "Enter teacher's salary: ";
+        std::cin >> is_salary;
+        if (is_available_input_for_salary(is_salary)) {
+            is_correct = true;
+            std::stringstream ss{ is_salary };
+            ss >> this->salary;
+            this->set_salary(salary);
+        }
+        else {
+            std::cout << "Salary can contain only numbers\n";
+            is_correct = false;
+        }
+    } while (!is_correct);
 }

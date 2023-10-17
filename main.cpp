@@ -35,5 +35,4 @@ int main() {
             break;
         }
     } while (is_integer != NUMBER_OF_OPTIONS_MAIN_MENU);
-
 }

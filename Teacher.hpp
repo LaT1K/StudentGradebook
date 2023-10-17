@@ -20,6 +20,7 @@ public:
 	void set_salary(double);
 	virtual void print(std::ostream& os) const override;
 	virtual void show_list() const override;
+	virtual void init() override;
 	std::string get_group() const override;
 };
 
