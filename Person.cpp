@@ -24,9 +24,6 @@ void Person::set_age(int age) {
 	this->age = age;
 }
 
-Person::Person() {
-    init();
-}
 
 Person::Person(std::string name, std::string surname, int age)
 	:name{ name }, surname{ surname }, age{ age } {

@@ -1,2 +1,3 @@
-Vlad	Stanishevskiy	18	pi-211
-Sasha          Latkivskiy     17 pi-212    
+sasha	latkivskiy	17	pi-212
+vlad	stanishevskiy	17	pi-211
+vitaliy	ostrovksiy	18	pi-212

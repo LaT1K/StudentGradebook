@@ -11,7 +11,7 @@ private:
 	std::string subject;
 	double salary{};
 public:
-	Teacher();
+	Teacher() = default;
 	Teacher(std::string name, std::string surname, std::string subject, int age = 0, double salary = 0.0);
 	Teacher(const Teacher& source);
 	std::string get_subject() const;

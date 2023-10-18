@@ -1,8 +1,5 @@
 #include "Teacher.hpp"
 
-Teacher::Teacher(){
-    init();
-}
 
 Teacher::Teacher(std::string name, std::string surname, std::string subject, int age, double salary)
     :Person(name, surname, age), subject{ subject }, salary{ salary } {

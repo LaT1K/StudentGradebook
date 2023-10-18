@@ -11,7 +11,7 @@ private:
 	std::string surname;
 	int age;
 public:
-	Person();
+	Person() = default;
 	Person(std::string, std::string, int);
 	Person(const Person& source);
 	std::string get_name() const;
