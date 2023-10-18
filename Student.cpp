@@ -11,6 +11,10 @@ void Student::set_group(std::string group) {
     this->group = group;
 }
 
+double Student::get_salary() const {
+    return 0.0;
+}
+
 Student::Student(std::string name, std::string surname, int age, std::string group)
     :Person(name, surname, age), group{ group } {
 }
@@ -54,16 +58,18 @@ bool delete_student(std::vector<std::shared_ptr<Person>>& student_list, const Pe
         Student* student = dynamic_cast<Student*>(it->get());
         if (student && *student == studentToDelete) {
             student_list.erase(it);
+            delete studentToDelete;
             return true;
         }
         ++it;
     }
+    delete studentToDelete;
     return false;
 }
 
 
 bool does_already_exist(const Person *student, std::ifstream& ifile) {
-    ifile.open("list.txt");
+    ifile.open(STUDENT_LIST);
     if (!ifile.is_open()) {
         std::cout << "Can not open the file\n";
         return false;
@@ -83,26 +89,14 @@ bool does_already_exist(const Person *student, std::ifstream& ifile) {
     ifile.close();
     return false;
 }
-void add_student(std::ofstream& ofile, std::ifstream& ifile) {
+void add_student(std::ofstream& ofile) {
     std::shared_ptr<Person> student = std::make_shared<Student>();
     student->init();
     ofile << *student;
-    //input_data_about_student(student);
-    //if (!does_already_exist(student, ifile)) {
-    //    ofile << *student;
-    //    std::cout << "=========================================\n";
-    //    std::cout << "Student [ " << student->get_surname() << " " << student->get_name() << " ]" << " was added to " << student->get_group() << std::endl;
-    //    std::cout << "=========================================\n";
-    //}
-    //else {
-    //    std::cout << "=========================================\n";
-    //    std::cout << "Student [ " << student->get_surname() << " " << student->get_name() << " ]" << " is already exists in the list\n";
-    //    std::cout << "=========================================\n";
-    //}
 }
 
-void rewrite_data_to_file(std::vector<std::shared_ptr<Person>> student_list, std::ofstream& ofile) {
-    ofile.open("list.txt");
+void rewrite_students_to_file(std::vector<std::shared_ptr<Person>> student_list, std::ofstream& ofile) {
+    ofile.open(STUDENT_LIST);
     if (!ofile.is_open()) {
         std::cout << "Can not open the file\n";
         return;
@@ -123,14 +117,41 @@ bool does_group_exist(std::vector <std::shared_ptr<Person>>& student_list, std::
     return false;
 }
 
+
+
+void Student::print(std::ostream& os) const{
+    Person::print(os);
+    os <<std::setw(10) << this->get_group() << std::endl;
+}
+
+void Student::show_list() const {
+    Person::show_list();
+    std::cout << std::setw(15) << this->get_group() << std::endl;
+}
+
+std::string Student::get_subject() const {
+    return "";
+}
+
+bool Student::operator==(const Person* rhs) const {
+    return this->get_name() == rhs->get_name() && this->get_surname() == rhs->get_surname() && this->get_group() == rhs->get_group() && this->get_age() == rhs->get_age();
+}
+
+void Student::init() {
+    Person::init();
+    std::cout << "Enter student's group: ";
+    std::cin >> this->group;
+    this->set_group(group);
+}
+
 void launch_students_menu() {
     std::string user_input{};
     int is_integer{};
     std::ifstream ifile;
-    const int NUMBER_OF_OPTIONS_STUDENTS_MENU{ 6 };
+    
     std::ofstream ofile;
     std::string surname{}, group{};
-    Person* student;
+    Person *student;
     std::vector<std::shared_ptr<Person>>student_list;
     do {
         show_students_menu();
@@ -140,10 +161,9 @@ void launch_students_menu() {
             std::cout << "You can only choose 1 - 2\n";
             continue;
         }
-        switch (Students_menu(is_integer))
-        {
+        switch (Students_menu(is_integer)) {
         case Students_menu::Show:
-            ifile.open("list.txt", std::ios::app);
+            ifile.open(STUDENT_LIST, std::ios::app);
             ifile.seekg(0, std::ios::beg);
             if (!ifile.is_open()) {
                 std::cout << "Can not open the file\n";
@@ -151,24 +171,25 @@ void launch_students_menu() {
             }
             student_list = get_student_list(ifile);
             ifile.clear();
-            ifile.seekg(0, std::ios::beg);
+            //ifile.seekg(0, std::ios::beg);
             ifile.close();
             if (!student_list.empty()) {
                 std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Age" << std::setw(10) << "Group" << std::endl;
                 for (auto& student : student_list)
-                    std::cout << std::setw(15) << std::left << student->get_name() << std::setw(15) << student->get_surname() << std::setw(10) << student->get_age() << std::setw(5) << student->get_group() << std::endl;
+                    student->show_list();
+                    //std::cout << std::setw(15) << std::left << student->get_name() << std::setw(15) << student->get_surname() << std::setw(10) << student->get_age() << std::setw(5) << student->get_group() << std::endl;
             }
             else
                 std::cout << "The list is empty\n";
             break;
         case Students_menu::Add:
-            ofile.open("list.txt", std::ios::app);
-            ifile.open("list.txt");
+            ofile.open(STUDENT_LIST, std::ios::app);
+            ifile.open(STUDENT_LIST);
             if (!ofile.is_open() && !ifile.is_open()) {
                 std::cout << "Can not open the file\n";
                 return;
             }
-            add_student(ofile, ifile);
+            add_student(ofile);
             student_list = get_student_list(ifile);
             ifile.seekg(0, std::ios::beg);
             ofile.close();
@@ -186,18 +207,18 @@ void launch_students_menu() {
             std::cout << "Enter information about student to delete\n";
             student = new Student;
             student->init();
-            //input_data_about_student(student);
             if (delete_student(student_list, student)) {
-                rewrite_data_to_file(student_list, ofile);
+                rewrite_students_to_file(student_list, ofile);
                 std::cout << "Student [ " << student->get_surname() << " ] was deleted from the list\n";
             }
             else
                 std::cout << "Student [ " << student->get_surname() << " ] " << " was not found\n";
             break;
+            delete student;
         case Students_menu::Group:
             std::cout << "Enter name of the group: ";
             std::cin >> group;
-            ifile.open("list.txt");
+            ifile.open(STUDENT_LIST);
             if (!ifile.is_open()) {
                 std::cout << "Can not open the file\n";
                 return;
@@ -217,30 +238,4 @@ void launch_students_menu() {
             break;
         }
     } while (is_integer != NUMBER_OF_OPTIONS_STUDENTS_MENU);
-}
-
-void Student::print(std::ostream& os) const{
-    Person::print(os);
-    os <<std::setw(10) << this->get_group() << std::endl;
-}
-
-void Student::show_list() const {
-    Person::show_list();
-    std::cout << std::setw(15) << this->get_group() << std::endl;
-}
-
-std::string Student::get_subject() const {
-    return "";
-}
-
-bool Student::operator==(const Person* rhs) const {
-    return this->get_name() == rhs->get_name() && this->get_surname() == rhs->get_surname() && this->get_group() == rhs->get_group() && this->get_age() == rhs->get_age();
-
-}
-
-void Student::init() {
-    Person::init();
-    std::cout << "Enter student's group: ";
-    std::cin >> this->group;
-    this->set_group(group);
 }

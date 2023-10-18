@@ -27,4 +27,5 @@ public:
 	virtual void show_list() const;
 	virtual std::string get_group() const = 0;
 	virtual std::string get_subject() const = 0;
+	virtual double get_salary() const = 0;
 };

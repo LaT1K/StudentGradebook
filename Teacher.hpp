@@ -12,7 +12,7 @@ private:
 	double salary{};
 public:
 	Teacher() = default;
-	Teacher(std::string name, std::string surname, std::string subject, int age = 0, double salary = 0.0);
+	Teacher(std::string name, std::string surname, int age, std::string subject, double salary);
 	Teacher(const Teacher& source);
 	std::string get_subject() const;
 	double get_salary() const;
@@ -22,10 +22,12 @@ public:
 	virtual void show_list() const override;
 	virtual void init() override;
 	std::string get_group() const override;
+	bool operator==(const Person* rhs) const;
 };
 
+const int NUMBER_OF_OPTIONS_TEACHERS_MENU{ 5 };
+const std::string TEACHER_LIST{ "Teachers.txt" };
+void launch_teachers_menu();
 enum class Teachers_menu { Show = 1, Add, Find, Delete };
-
-//void launch_teachers_menu();
-//std::vector<Teacher> get_teacher_list(std::ifstream &);
-//void add_teacher(std::ofstream&, std::ifstream&);
+std::vector<std::shared_ptr<Person>> get_teacher_list(std::ifstream& ifile);
+void add_teacher(std::ofstream& ofile);

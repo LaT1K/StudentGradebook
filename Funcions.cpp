@@ -8,20 +8,20 @@ void show_main_menu() {
 }
 void show_students_menu() {
     std::cout << "Choose the option\n";
-    std::cout << "1 - Show table of students\n";
-    std::cout << "2 - Add student\n";
-    std::cout << "3 - Find student by surname\n";
-    std::cout << "4 - Delete student\n";
+    std::cout << "1 - Show the table of students\n";
+    std::cout << "2 - Add a student\n";
+    std::cout << "3 - Find a student by surname\n";
+    std::cout << "4 - Delete a student\n";
     std::cout << "5 - Show students from given group\n";
     std::cout << "6 - Quit\n";
 }
 
 void show_teachers_menu() {
     std::cout << "Choose the option\n";
-    std::cout << "1 - Show table of teachers\n";
-    std::cout << "2 - Add teacher\n";
-    std::cout << "3 - Find teacher by surname\n";
-    std::cout << "4 - Delete teacher\n";
+    std::cout << "1 - Show the table of teachers\n";
+    std::cout << "2 - Add a teacher\n";
+    std::cout << "3 - Find a teacher by surname\n";
+    std::cout << "4 - Delete a teacher\n";
     std::cout << "5 - Quit\n";
 }
 
@@ -49,3 +49,4 @@ bool is_available_input_for_salary(std::string user_salary) {
     else
         return false;
 }
+
