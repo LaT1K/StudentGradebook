@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <fstream>
-//#include "Functions.hpp"
 #include "Person.hpp"
 
 
@@ -14,7 +13,6 @@ public:
 	Student(const Student&);
 	void set_group(std::string);
 	bool operator==(const Person*) const;
-	//void input_data_about_student(Student&);
     void print(std::ostream& os) const override;
 	void show_list() const override;
 	void init() override;

@@ -21,7 +21,7 @@ int main() {
         std::cin >> user_input;
         std::stringstream ss{user_input};
         if (!(ss >> is_integer) || is_integer <1 || is_integer >NUMBER_OF_OPTIONS_MAIN_MENU) {
-            std::cout << "You can only choose 1 - 3\n";
+            std::cout << "You can only choose 1 - " << NUMBER_OF_OPTIONS_MAIN_MENU << std::endl;
             continue;
         }
         switch (Main_menu(is_integer)){

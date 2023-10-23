@@ -46,12 +46,10 @@ bool delete_teacher(std::vector<std::shared_ptr<Person>>& teacher_list, const Pe
         Teacher* teacher = dynamic_cast<Teacher*>(it->get());
         if (teacher && *teacher == teacherToDelete) {
             teacher_list.erase(it);
-            delete teacherToDelete;
             return true;
         }
         ++it;
     }
-    delete teacherToDelete;
     return false;
 }
 
@@ -82,7 +80,7 @@ void launch_teachers_menu() {
         std::cin >> user_input;
         std::stringstream ss{ user_input };
         if (!(ss >> is_integer) || is_integer <1 || is_integer >NUMBER_OF_OPTIONS_TEACHERS_MENU) {
-            std::cout << "You can only choose 1 - 5\n";
+            std::cout << "You can only choose 1 - " << NUMBER_OF_OPTIONS_TEACHERS_MENU << std::endl;;
             continue;
         }
         switch (Teachers_menu(is_integer)) {
@@ -94,7 +92,6 @@ void launch_teachers_menu() {
             }
             teacher_list = get_teacher_list(ifile);
             ifile.clear();
-            /*ifile.seekg(0, std::ios::beg);*/
             ifile.close();
             if (!teacher_list.empty()) {
                 std::cout << std::setw(15) << std::left << "Name" << std::setw(15) << "Surname" << std::setw(10) << "Age" << std::setw(15) << "Subject" << std::setw(15) << "Salary" << std::endl;
@@ -136,6 +133,7 @@ void launch_teachers_menu() {
             else
                 std::cout << "Student [ " << teacher->get_surname() << " ] was not found\n";
             delete teacher;
+            break;
         default:
             break;
         }
